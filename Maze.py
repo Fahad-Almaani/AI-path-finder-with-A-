@@ -8,7 +8,7 @@
 import pygame
 import math
 from queue import PriorityQueue
-# from time import sleep
+
 from GUI import Button
 # width of the screen x*x
 WIDTH = 800
@@ -114,22 +114,26 @@ def reconstruct_path(came_from,current,draw):
         draw()
 
 def A_STAR(draw,grid,start,end):
+    # herstic function take 2 points and return the distance  
     def h(p1,p2):
         x1,y1 = p1
         x2,y2 = p2
         return abs(x1-x2) + abs(y1-y2)
-        
+    
+    # initialize the variables 
     count = 0
     open_set = PriorityQueue()
-    open_set.put((0,count,start))
+    open_set.put((0,count,start))   
     came_form = {}
+    # a dictionary to store a g_score for all spots
     g_score = {spot:float('inf') for row in grid for spot in row}
-    g_score[start] = 0
+    g_score[start]  = 0
     f_score = {spot:float('inf') for row in grid for spot in row}
     f_score[start] = h(start.get_pos(),end.get_pos())
 
     open_set_hash = {start}
 
+    # while there is spots to check keep searching for end
     while not open_set.empty():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -137,31 +141,41 @@ def A_STAR(draw,grid,start,end):
                 return
             if CLEAR_btn.handle_event(event):
                 return False
-
+        # open set index 2 where the spot stored
         current = open_set.get()[2]
+        # we remove the spot
         open_set_hash.remove(current)
 
+        # if we reach the end display the path 
         if current == end:
             reconstruct_path(came_form,end,draw)
             end.make_end()
             start.make_start()
             return True
 
+        # check neighbors
         for neighbor in current.neighbors:
+            # get the current node g-score
             temp_g_score = g_score[current] + 1
+            # we look for a neighbor closer then the current node 
             if temp_g_score < g_score[neighbor]:
+                # add it to path
                 came_form[neighbor] = current
+                # update the g_score 
                 g_score[neighbor] = temp_g_score
                 f_score[neighbor] = temp_g_score + h(neighbor.get_pos(),end.get_pos())
+                # if spot not added to the open set hash add it
                 if neighbor not in open_set_hash:
                     count+=1
                     open_set.put((f_score[neighbor],count,neighbor)) 
                     open_set_hash.add(neighbor)
                     neighbor.make_open()
+                
         draw()
-
+        # color it to green | closed that the node is considered
         if current != start:
             current.make_closed()
+    # false we couldn't find the end
     return False
 
 
@@ -185,8 +199,6 @@ def draw_grid(win,rows,width):
 
 
 def draw(win,grid,rows,width):
-    # win.fill(WHITE)
-
     for row in grid:
         for spot in row:
             spot.draw(win)
@@ -257,15 +269,11 @@ def main(win,width):
                 
             if start and end:
                 if A_star_btn.handle_event(event):
+                    # update all the neighbors of all spots in the grid
                     for row in grid:
                         for spot in row:
                             spot.update_neighbors(grid)
                     A_STAR(lambda: draw(win,grid,ROWS,width),grid,start,end)
-                # elif DFS_btn.handle_event(event):
-                #     for row in grid:
-                #         for spot in row:
-                #             spot.update_neighbors(grid)
-                #     DFS(draw,grid,start,end)
                 elif CLEAR_btn.handle_event(event):
                     start = None
                     end = None

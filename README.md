@@ -18,5 +18,6 @@ Note : Left click with the mouse for removing a spot
 
 
 this project is based on <a href="https://www.youtube.com/watch?v=JtiK0DOeI4A&t=3861s" target="_blank">Tech With Tim video</a>
+[![Watch the video](https://img.youtube.com/vi/JtiK0DOeI4A/0.jpg)](https://www.youtube.com/watch?v=JtiK0DOeI4A&t=3861s)
 
 Props for <a href="https://github.com/talal3idarus" target="_blank">Talal</a> and <a href="https://github.com/1010pm" target="_blank">Yahya</a> for the good work

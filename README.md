@@ -14,4 +14,4 @@ How To Use:
 4. now you can click the `A*` Button and the algorithm starts
 5. finally you can click on `clear` if you want to stop and click again `clear` to clear the board
 
-Note : Left click with the mouse for removing a sopt
+Note : Left click with the mouse for removing a spot

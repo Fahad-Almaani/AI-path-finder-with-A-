@@ -15,3 +15,6 @@ How To Use:
 5. finally you can click on `clear` if you want to stop and click again `clear` to clear the board
 
 Note : Left click with the mouse for removing a spot
+
+
+this project is based on <a href="https://www.youtube.com/watch?v=JtiK0DOeI4A&t=3861s" target="_blank">Tech With Tim video</a>

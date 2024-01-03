@@ -1,6 +1,6 @@
 # Path finder using A* Algorithm 
 
-## This Is a AI course project For impleminting A* serach Algorithm in a Maze game 
+## This Is a AI course project for impleminting A* search Algorithm
 
 
 How To Run:
